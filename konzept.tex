@@ -12,6 +12,18 @@ von $11,1$V betrieben. Da unter anderem der Mikrocontroller nur mit $5$V versorg
 werden kann, nutzen wie einen Linearregler, der zusätzlich zu $12$V Schiene eine
 $5$V Schiene erzeugt.
 
+\subsection{Der Sender}
+Das Sendesignal hat eine Frequenz von @TODO [keine Ahnung] und wird direkt vom auf dem Board
+verbauten Quarz-Oszillator erzeugt, der zusätzlich dem Mikrocontroller als externe Clock
+dient. Das erzeugte Signal lässt vom den Mikrocontroller über ein UND-Gatter steuern. Dieses
+Signal wird dann letztendlich von einem FET auf $12$V verstärkt und anschließend gefiltert,
+um nichtliniearitäten auszugleichen. Die Verstärkerstufe ist wie folgt aufgebaut:
+
+\begin{figure}[H]
+    \includegraphics{res/Endstufe.png}
+    \caption{Verstärkerschaltung des Senders}
+\end{figure}
+
 \subsection{Filterung des erzeugten Signals}
 Damit der Sender ausschließlich im erlaubten Band sendet, wird der Verstärkerstufe
 ein Tiefpassfilter nachgeschaltet. Wir haben uns für einen Tiefpassfilter siebter 
@@ -36,9 +48,18 @@ Der Sender wir von einem einfachen Mikrocontroller gesteuert. Dieser muss nur
 sehr geringe Anforderungen erfüllen, da er keine aufwendigen Berechnungen oder anderweitige
 Aufgaben bewältigen muss. Er muss lediglich in der Lage sein, Daten, wie z.B. das 
 zu sendende Morsezeichen und die Sendeintervalllänge zu speichern und später dann
-den Sender periodisch zu aktivieren. Deshalb haben wir für den Mikrocontrollervom
-Typ ATtiny44 entschieden, der alle Voraussetzungen erfüllt.
+den Sender periodisch zu aktivieren. Deshalb haben wir für den Mikrocontroller vom
+Typ ATtiny44 entschieden, der alle Voraussetzungen erfüllt. Der Mikrocontroller bekommt
+ein externes Clock-Signal vom Quarz-Oszillator, der eine höhere Präzision, als die interne
+Clock hat. Diese Präzision ist wichtig, da sich sonst auf dauer die Sendeintervalle von
+verschiedenen Sendern überlappen können.
 @TODO mehr generischen Text schreiben...
+Der Mikrocontroller ist folgendermaßen beschaltet:
+
+\begin{figure}[H]
+    \includegraphics[scale=0.9]{res/Controller.png}
+    \caption{Beschaltung des Mikrocontrollers}
+\end{figure}
 
 \subsection{Bedienung}
 Der Fuchsjagd-Sender wird über einen Statusschalter, sowie über ein Potentiometer
