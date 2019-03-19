@@ -24,9 +24,27 @@ Signal senden wollen. Das Filter ist wiefolgt aufgebaut:
 \end{figure}
 
 \begin{figure}[H]
-    \includegraphics[scale=0.6]{res/TP_Simulation.png}[]
+    \includegraphics[scale=0.6]{res/TP_Simulation.png}
     \caption{Frequenzgang des Filters: Transmission in rot, Reflektionsfaktor in blau}
 \end{figure}
 Die Simulation zeigt das gewünschte Verhalten des Filters: Bei der gewünschten
 Sendefrequenz von [Keine Ahnugn wie viel @TODO] beträgt die Dämpfung quasi $0$dB.
 Die für uns eigentlich unkritische Welligkeit bleibt unter $-0.3$dB.
+
+\subsection{Steuerung}
+Der Sender wir von einem einfachen Mikrocontroller gesteuert. Dieser muss nur
+sehr geringe Anforderungen erfüllen, da er keine aufwendigen Berechnungen oder anderweitige
+Aufgaben bewältigen muss. Er muss lediglich in der Lage sein, Daten, wie z.B. das 
+zu sendende Morsezeichen und die Sendeintervalllänge zu speichern und später dann
+den Sender periodisch zu aktivieren. Deshalb haben wir für den Mikrocontrollervom
+Typ ATtiny44 entschieden, der alle Voraussetzungen erfüllt.
+@TODO mehr generischen Text schreiben...
+
+\subsection{Bedienung}
+Der Fuchsjagd-Sender wird über einen Statusschalter, sowie über ein Potentiometer
+gesteuert. Als Anzeige dienen 5 LEDs. Mit dem Statusschalter wird ausgewählt, ob
+man das zu sendende Morsezeichen oder die Sendeintervalllänge einstellen möchte.
+Mit dem Potentiometer wir der eigentliche Wert eingestellt. Über die LEDs wird dieser
+Wert in bestimmten Schritten angezeigt. Einmal eingestellt, sendet der Sender das gewünschte
+Morsezeichen in festgelegten Zeitabständen. 
+@TODO Konkretisieren! Wie lange, wie groß sind die Wertschritte?!!!
