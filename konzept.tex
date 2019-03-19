@@ -13,7 +13,7 @@ werden kann, nutzen wie einen Linearregler, der zusätzlich zu $12$V Schiene ein
 $5$V Schiene erzeugt.
 
 \subsection{Der Sender}
-Das Sendesignal hat eine Frequenz von @TODO [keine Ahnung] und wird direkt vom auf dem Board
+Das Sendesignal hat eine Frequenz von $3,5795$MHz und wird direkt vom auf dem Board
 verbauten Quarz-Oszillator erzeugt, der zusätzlich dem Mikrocontroller als externe Clock
 dient. Das erzeugte Signal lässt vom den Mikrocontroller über ein UND-Gatter steuern. Dieses
 Signal wird dann letztendlich von einem FET auf $12$V verstärkt und anschließend gefiltert,
@@ -40,7 +40,7 @@ Signal senden wollen. Das Filter ist wiefolgt aufgebaut:
     \caption{Frequenzgang des Filters: Transmission in rot, Reflektionsfaktor in blau}
 \end{figure}
 Die Simulation zeigt das gewünschte Verhalten des Filters: Bei der gewünschten
-Sendefrequenz von [Keine Ahnugn wie viel @TODO] beträgt die Dämpfung quasi $0$dB.
+Sendefrequenz von $3,5795$MHz beträgt die Dämpfung quasi $0$dB.
 Die für uns eigentlich unkritische Welligkeit bleibt unter $-0.3$dB.
 
 \subsection{Steuerung}
@@ -52,7 +52,12 @@ den Sender periodisch zu aktivieren. Deshalb haben wir für den Mikrocontroller 
 Typ ATtiny44 entschieden, der alle Voraussetzungen erfüllt. Der Mikrocontroller bekommt
 ein externes Clock-Signal vom Quarz-Oszillator, der eine höhere Präzision, als die interne
 Clock hat. Diese Präzision ist wichtig, da sich sonst auf dauer die Sendeintervalle von
-verschiedenen Sendern überlappen können.
+verschiedenen Sendern überlappen können. Der Mikrocontroller schaltet im Sendebetrieb den Sender
+über einen GPIO-Pin und ein UND-Gatter jeweils eine gewisse Zeit ein und aus, je nach eingestelltem
+Morsezeichen. Ist das Sendeintervall vorbei, wird der Sender bis zum nächsten Intervall komplett
+deaktiviert.
+
+Der Mikrocontroller wird komplett in C programmiert.
 @TODO mehr generischen Text schreiben...
 Der Mikrocontroller ist folgendermaßen beschaltet:
 
@@ -64,8 +69,8 @@ Der Mikrocontroller ist folgendermaßen beschaltet:
 \subsection{Bedienung}
 Der Fuchsjagd-Sender wird über einen Statusschalter, sowie über ein Potentiometer
 gesteuert. Als Anzeige dienen 5 LEDs. Mit dem Statusschalter wird ausgewählt, ob
-man das zu sendende Morsezeichen oder die Sendeintervalllänge einstellen möchte.
+man das zu sendende Morsezeichen oder die Sendepausen einstellen möchte.
 Mit dem Potentiometer wir der eigentliche Wert eingestellt. Über die LEDs wird dieser
 Wert in bestimmten Schritten angezeigt. Einmal eingestellt, sendet der Sender das gewünschte
-Morsezeichen in festgelegten Zeitabständen. 
-@TODO Konkretisieren! Wie lange, wie groß sind die Wertschritte?!!!
+Morsezeichen in den festgelegten Zeitabständen für jeweils eine feste Zeitdauer. 
+@TODO Konkretisieren! Wie groß sind die Wertschritte?!!!
