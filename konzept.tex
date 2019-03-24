@@ -7,17 +7,17 @@ folgendermaßen konzipiert.
     \includegraphics{res/Versorgung.png}
     \caption{Versorgung der Platine}
 \end{figure}
-Die Platine wird über einen dreizelligen Lithium-Ionen-Akku mit einer üblichen Nennspannung
+Die Platine wird über einen dreizelligen Lithium-Polymer-Akku mit einer Nennspannung
 von $11,1$V betrieben. Da unter anderem der Mikrocontroller nur mit $5$V versorgt
 werden kann, nutzen wie einen Linearregler, der zusätzlich zu $12$V Schiene eine
 $5$V Schiene erzeugt.
 
 \subsection{Der Sender}
 Das Sendesignal hat eine Frequenz von $3,5795$MHz und wird direkt vom auf dem Board
-verbauten Quarz-Oszillator erzeugt, der zusätzlich dem Mikrocontroller als externe Clock
+verbauten Quarz-Oszillator erzeugt, der zusätzlich dem Mikrocontroller als Takt
 dient. Das erzeugte Signal lässt vom den Mikrocontroller über ein UND-Gatter steuern. Dieses
 Signal wird dann letztendlich von einem FET auf $12$V verstärkt und anschließend gefiltert,
-um nichtliniearitäten auszugleichen. Die Verstärkerstufe ist wie folgt aufgebaut:
+um durch nichtliniearitäten entstandende Oberwellen auszugleichen. Die Verstärkerstufe ist wie folgt aufgebaut:
 
 \begin{figure}[H]
     \includegraphics{res/Endstufe.png}
@@ -27,7 +27,7 @@ um nichtliniearitäten auszugleichen. Die Verstärkerstufe ist wie folgt aufgeba
 \subsection{Filterung des erzeugten Signals}
 Damit der Sender ausschließlich im erlaubten Band sendet, wird der Verstärkerstufe
 ein Tiefpassfilter nachgeschaltet. Wir haben uns für einen Tiefpassfilter siebter 
-Ordnung von Typ Tschebyscheff entschieden, da er eine sehr hohe Steilheit aufweißt
+Ordnung von Typ Tschebyscheff entschieden, da es eine sehr hohe Steilheit aufweißt
 und die Ripple kein Problem darstellen, da wir ohnehin ein sehr schmalbandiges
 Signal senden wollen. Das Filter ist wiefolgt aufgebaut:
 \begin{figure}[H]
@@ -41,7 +41,7 @@ Signal senden wollen. Das Filter ist wiefolgt aufgebaut:
 \end{figure}
 Die Simulation zeigt das gewünschte Verhalten des Filters: Bei der gewünschten
 Sendefrequenz von $3,5795$MHz beträgt die Dämpfung quasi $0$dB.
-Die für uns eigentlich unkritische Welligkeit bleibt unter $-0.3$dB.
+Die für uns unkritische Welligkeit bleibt unter $-0.3$dB.
 
 \subsection{Steuerung}
 Der Sender wir von einem einfachen Mikrocontroller gesteuert. Dieser muss nur
