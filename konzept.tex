@@ -61,7 +61,7 @@ deaktiviert.
 Der Mikrocontroller wird komplett in C programmiert. Dadurch kann die Software flexibler auf die Aufgabe zugeschnitten
 werden und es ist daher möglich einen günstigereren Mikrocontroller mit weniger Flash-Speicher zu nutzen.
 
-@todo mehr generischen Text schreiben...
+%@todo mehr generischen Text schreiben...
 Der Mikrocontroller ist folgendermaßen beschaltet:
 
 \begin{figure}[H]
@@ -75,5 +75,7 @@ gesteuert. Als Anzeige dienen 5 LEDs. Mit dem Statusschalter wird ausgewählt, o
 man das zu sendende Morsezeichen oder die Sendepausen einstellen möchte.
 Mit dem Potentiometer wir der eigentliche Wert eingestellt. Über die LEDs wird dieser
 Wert in bestimmten Schritten angezeigt. Einmal eingestellt, sendet der Sender das gewünschte
-Morsezeichen in den festgelegten Zeitabständen für jeweils eine feste Zeitdauer.
-@todo Konkretisieren! Wie groß sind die Wertschritte?!!!
+Morsezeichen in den festgelegten Zeitabständen für jeweils eine feste Zeitdauer. Für die Bedienung ist ein passender Schraubenzieher erforderlich.\\
+Bei der aktuellen Programmierung des Mikrocontrollers sind die möglichen Intervalle 10, 20, 30, 45, 60, 120, 240 und 600 Sekunden.
+Die möglichen Sendesymbole sind A, E, I, O, U, T, M, N. Folglich beträgt auch die Schrittweite für das Einstellen von deinem mit dem Potentiometer eine Achtel Umdrehung. \\
+Der Code ist dabei so geschrieben, dass die möglichen Intervalllängen und Symbole, sowie die Schrittweite einfach, also durch Ändern eines einzelnen Wertes, auszutauschen sind.
